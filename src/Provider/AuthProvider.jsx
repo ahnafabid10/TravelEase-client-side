@@ -38,8 +38,9 @@ const AuthProvider = ({children}) => {
     }
 
     //forget password
-    const resetPassword = (email)=>{
-        return sendPasswordResetEmail(auth, email)
+     const forgetPassword = (password) =>{
+        setLoading(true)
+        return sendPasswordResetEmail(auth, password)
     }
 
     useEffect(()=>{
@@ -58,9 +59,8 @@ const AuthProvider = ({children}) => {
         signInUser,
         signInWithGoogle,
         signOutUser,
-        onAuthStateChanged,
         updateUser,
-        resetPassword,
+        forgetPassword,
         user,
         setUser,
         loading,

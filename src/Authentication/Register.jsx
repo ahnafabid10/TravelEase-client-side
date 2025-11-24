@@ -2,6 +2,7 @@ import React, { use, useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import { Link, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Register = () => {
 
@@ -15,7 +16,6 @@ const Register = () => {
         setShowPassword(!showPassword)
     }
 
-    // const location = useLocation()
     const navigate = useNavigate()
 
     const handleRegister = (e)=>{
@@ -44,6 +44,7 @@ const Register = () => {
 
         createUser( email, password)
         .then((result) => {
+          toast('Registration completed successfully.')
         setSuccess(true)
         const user = result.user
         e.target.reset()
@@ -127,7 +128,7 @@ const Register = () => {
   </div>
 </div>
         </div>
-        
+        <ToastContainer></ToastContainer>
         </div>
         
     );

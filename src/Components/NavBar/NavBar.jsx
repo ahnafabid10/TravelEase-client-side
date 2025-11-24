@@ -2,7 +2,7 @@ import React, { use, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { FaUser } from 'react-icons/fa';
 import { AuthContext } from '../../Context/AuthContext';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const NavBar = () => {
 
@@ -90,6 +90,7 @@ const NavBar = () => {
           </div>
         )}
       </nav>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };
