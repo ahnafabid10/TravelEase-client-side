@@ -1,11 +1,22 @@
 import React, { use, useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register = () => {
 
-    const {createUser, signInWithGoogle,} = use(AuthContext)
+    const {createUser, signInWithGoogle, setUser, updateUser,} = use(AuthContext)
+    const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState("")
+    const [success, setSuccess] = useState(false)
+
+    const handleShowPassword = (e)=>{
+        e.preventDefault()
+        setShowPassword(!showPassword)
+    }
+
+    // const location = useLocation()
+    const navigate = useNavigate()
 
     const handleRegister = (e)=>{
         e.preventDefault();
@@ -15,24 +26,36 @@ const Register = () => {
         const password= e.target.password.value
         console.log(name,photo,email,password)
 
-        // const length6Pattern = /^.{6,}$/;
-        // const casePattern = /^(?=.*[a-z])(?=.*[A-Z]).+$/
+        const length6Pattern = /^.{6,}$/;
+        const casePattern = /^(?=.*[a-z])(?=.*[A-Z]).+$/
 
-        // if(!length6Pattern.test(password)){
-        //     setError('Password must be 6 character or long')
-        //     return;
-        // }
+        if(!length6Pattern.test(password)){
+            setError('Password must be 6 character or long')
+            return;
+        }
 
-        // else if(!casePattern.test(password)){
-        //     setError('Password must have at least one uppercase and one lower case character')
-        //     return;
-        // }
+        else if(!casePattern.test(password)){
+            setError('Password must have at least one uppercase and one lower case character')
+            return;
+        }
 
         setError('')
+        setSuccess(false)
 
         createUser( email, password)
         .then((result) => {
-        console.log(result.user)
+        setSuccess(true)
+        const user = result.user
+        e.target.reset()
+        updateUser({...user, displayName : name, photoURL: photo })
+        .then(()=>{
+            setUser({...user,displayName : name, photoURL: photo })
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+        navigate('/')
+
         })
         .catch((error) => {
             console.log(error)
@@ -43,7 +66,10 @@ const Register = () => {
 
     const handleSignInWithGoogle =()=>{
         signInWithGoogle()
+        setSuccess(true)
+        navigate('/')
         .then(result=>{
+            setSuccess(true)
             console.log(result.user)
         })
         .catch(error=>{
@@ -73,10 +99,18 @@ const Register = () => {
           <input type="email" name='email' className="input" placeholder="Email" />
           {/* password */}
           <label className="label">Password</label>
-          <input type="password" name='password' className="input" placeholder="Password" />
+          <div className='flex items-center'>
+            <input type={showPassword ? "text" : "password"} name='password' className="input" placeholder="Password" />
+          <div onClick={handleShowPassword} className="btn btn-xs absolute  right-9 ">{showPassword ?  <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}</div>
+          </div>
+          
           <button className="btn btn-neutral mt-4">Register</button>
           
+          
         </fieldset>
+        {
+            success && <p className='text-green-600 text-center'>Registration completed successfully.</p>
+        }
         {
             error && <p className='text-red-600 text-center'>{error}</p>
         }
@@ -93,7 +127,9 @@ const Register = () => {
   </div>
 </div>
         </div>
+        
         </div>
+        
     );
 };
 
