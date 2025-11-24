@@ -6,6 +6,9 @@ import Home from "../Pages/Home";
 import AllVehicles from "../Pages/AllVehicles";
 import Login from "../Authentication/Login";
 import Register from "../Authentication/Register";
+import AddVehicle from "../Pages/AddVehicle";
+import MyVehicle from "../Pages/MyVehicle";
+import MyBookings from "../Pages/MyBookings";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +32,18 @@ const router = createBrowserRouter([
         {
             path:'/register',
             element:<Register></Register>
+        },
+        {
+            path:'/addVehicle',
+            element:<AddVehicle></AddVehicle>
+        },
+        {
+            path:'/myVehicles',
+            element:<MyVehicle></MyVehicle>
+        },
+        {
+            path:'/myBookings',
+            element:<MyBookings></MyBookings>
         },
         {
             path:"/*",

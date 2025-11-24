@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { FaUser } from 'react-icons/fa';
+import AuthProvider from '../../Provider/AuthProvider';
 
 const NavBar = () => {
+
+  const {user} = use(AuthProvider)
+
   const [isOpen, setIsOpen] = useState(false);
 
   const links = (
     <>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/allVehicles" >All Vehicles</NavLink>
+      {
+        user && <>
+        <NavLink to="/addVehicle" >Add Vehicles</NavLink>
+        <NavLink to="/myVehicles" >My Vehicles</NavLink>
+        <NavLink to="/myBookings" >My Bookings</NavLink>
+        </>
+      }
     </>
   );
 
@@ -51,7 +62,13 @@ const NavBar = () => {
             <ul className="menu menu-horizontal px-1 text-lg space-x-6">{links}</ul>
           </div>
           <div className="hidden lg:flex items-center">
-            <Link to='/login' className="btn-donate flex items-center space-x-2 text-center transition-colors"><FaUser /> <span>Login</span></Link>
+            {
+              user ? 
+              <button className="btn-donate flex items-center space-x-2 text-center transition-colors"><span>Sign Out</span></button> 
+              :
+              <Link to='/login' className="btn-donate flex items-center space-x-2 text-center transition-colors"><FaUser /> <span>Login</span></Link>
+            }
+            
           </div>
         </div>
         {isOpen && (
