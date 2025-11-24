@@ -1,11 +1,11 @@
 import React, { use, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { FaUser } from 'react-icons/fa';
-import AuthProvider from '../../Provider/AuthProvider';
+import { AuthContext } from '../../Context/AuthContext';
 
 const NavBar = () => {
 
-  const {user} = use(AuthProvider)
+  const {user} = use(AuthContext)
 
   const [isOpen, setIsOpen] = useState(false);
 
