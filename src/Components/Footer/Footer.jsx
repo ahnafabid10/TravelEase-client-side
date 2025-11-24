@@ -4,7 +4,7 @@ import { FaX } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 text-base-content rounded p-6 md:p-10">
+    <footer className="bg-base-200 text-base-content shadow-2xl border-t rounded p-6 md:p-10">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <h2 className="text-2xl font-bold text-center md:text-left">TravelEase</h2>
 
