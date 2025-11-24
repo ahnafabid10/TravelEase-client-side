@@ -2,12 +2,23 @@ import React, { use, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { FaUser } from 'react-icons/fa';
 import { AuthContext } from '../../Context/AuthContext';
+import { toast } from 'react-toastify';
 
 const NavBar = () => {
 
-  const {user} = use(AuthContext)
+  const {user, signOutUser} = use(AuthContext)
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleSignOut =() =>{
+    signOutUser()
+    .then(
+      toast("Sign Out Successfully")
+    )
+    .catch(error =>{
+      console.log(error)
+    })
+  }
 
   const links = (
     <>
@@ -64,7 +75,7 @@ const NavBar = () => {
           <div className="hidden lg:flex items-center">
             {
               user ? 
-              <button className="btn-donate flex items-center space-x-2 text-center transition-colors"><span>Sign Out</span></button> 
+              <button onClick={handleSignOut} className="btn-donate flex items-center space-x-2 text-center transition-colors"><span>Sign Out</span></button> 
               :
               <Link to='/login' className="btn-donate flex items-center space-x-2 text-center transition-colors"><FaUser /> <span>Login</span></Link>
             }

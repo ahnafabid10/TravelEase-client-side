@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithPopup,  signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
+import { onAuthStateChanged, signInWithPopup,  signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
-import { auth } from '../FireBase/FireBase.config';
+import { auth } from '../FireBase/FireBase.init';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -10,17 +10,17 @@ const AuthProvider = ({children}) => {
     const[user, setUser] = useState(null)
     const[loading, setLoading] = useState(true)
 
-    const createUser = (email, password)=>{
-        setLoading(true)
+    const createUser = (email,password)=>{
         return createUserWithEmailAndPassword(auth, email, password)
     }
+
 
     const signInUser = (email, password) =>{
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const signInGoogle =()=>{
+    const signInWithGoogle =()=>{
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
@@ -31,11 +31,11 @@ const AuthProvider = ({children}) => {
         return signOut(auth)
     }
 
-    // //update user
-    // const updateUser = (updatedData)=>{
-    //     setLoading(true)
-    //     return updateProfile(auth.currentUser, updatedData)
-    // }
+    //update user
+    const updateUser = (updatedData)=>{
+        setLoading(true)
+        return updateProfile(auth.currentUser, updatedData)
+    }
 
     //forget password
     const resetPassword = (email)=>{
@@ -56,10 +56,10 @@ const AuthProvider = ({children}) => {
     const authInfo ={
         createUser,
         signInUser,
-        signInGoogle,
+        signInWithGoogle,
         signOutUser,
         onAuthStateChanged,
-        // updateUser,
+        updateUser,
         resetPassword,
         user,
         loading,
