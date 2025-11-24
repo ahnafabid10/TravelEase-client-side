@@ -9,6 +9,7 @@ import Register from "../Authentication/Register";
 import AddVehicle from "../Pages/AddVehicle";
 import MyVehicle from "../Pages/MyVehicle";
 import MyBookings from "../Pages/MyBookings";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -35,15 +36,17 @@ const router = createBrowserRouter([
         },
         {
             path:'/addVehicle',
-            element:<AddVehicle></AddVehicle>
+            element:<PrivateRoute>
+              <AddVehicle></AddVehicle>
+            </PrivateRoute>
         },
         {
             path:'/myVehicles',
-            element:<MyVehicle></MyVehicle>
+            element:<PrivateRoute><MyVehicle></MyVehicle></PrivateRoute>
         },
         {
             path:'/myBookings',
-            element:<MyBookings></MyBookings>
+            element:<PrivateRoute><MyBookings></MyBookings></PrivateRoute>
         },
         {
             path:"/*",
