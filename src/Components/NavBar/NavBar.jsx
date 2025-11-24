@@ -51,7 +51,7 @@ const NavBar = () => {
             <ul className="menu menu-horizontal px-1 text-lg space-x-6">{links}</ul>
           </div>
           <div className="hidden lg:flex items-center">
-            <Link className="btn-donate flex items-center space-x-2 text-center transition-colors"><FaUser /> <span>Login</span></Link>
+            <Link to='/login' className="btn-donate flex items-center space-x-2 text-center transition-colors"><FaUser /> <span>Login</span></Link>
           </div>
         </div>
         {isOpen && (
