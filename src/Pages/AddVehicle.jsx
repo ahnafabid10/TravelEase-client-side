@@ -22,7 +22,8 @@ const AddVehicle = () => {
         
         const newProduct = {vehicleName, ownerName, category, pricePerDay, location, availability, description, coverImage, userEmail ,
             currentUserEmail: user.email,
-            currentUserName : user.displayName
+            currentUserName : user.displayName,
+            createdAt: new Date().toISOString()
         }
 
         axiosInstance.post('/addVehicle', newProduct)
@@ -42,7 +43,6 @@ const AddVehicle = () => {
         <h1 className="text-6xl font-bold text-center mb-8">Add Vehicle</h1>
 
         <form onSubmit={handleAddVehicle} className="space-y-6 bg-base-100 p-8 rounded-xl shadow-lg">
-          {/* Vehicle Name */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Vehicle Name</span>
@@ -56,7 +56,6 @@ const AddVehicle = () => {
             />
           </div>
 
-          {/* Owner Name */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Owner Name</span>
@@ -70,7 +69,6 @@ const AddVehicle = () => {
             />
           </div>
 
-          {/* Category (multi-select style) */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Category</span>
@@ -88,7 +86,6 @@ const AddVehicle = () => {
             </select>
           </div>
 
-          {/* Price Per Day */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Price Per Day ($)</span>
@@ -103,7 +100,6 @@ const AddVehicle = () => {
             />
           </div>
 
-          {/* Location */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Location</span>
@@ -117,7 +113,6 @@ const AddVehicle = () => {
             />
           </div>
 
-          {/* Availability */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Availability</span>
@@ -131,7 +126,6 @@ const AddVehicle = () => {
             </select>
           </div>
 
-          {/* Description */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Description</span>
@@ -144,7 +138,6 @@ const AddVehicle = () => {
             />
           </div>
 
-          {/* Cover Image URL */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Cover Image URL (imgbb or any)</span>
@@ -157,7 +150,6 @@ const AddVehicle = () => {
             />
           </div>
 
-          {/* User Email */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Owner Email</span>
@@ -171,7 +163,6 @@ const AddVehicle = () => {
             />
           </div>
 
-          {/* Submit Button */}
           <div className="form-control mt-8">
             <button  type="submit" className="btn-donate w-full">
               Add A Vehicle

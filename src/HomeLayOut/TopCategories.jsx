@@ -73,7 +73,7 @@ const TopCategories = () => {
                         <div
                         key={recent._id} className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-200">
                     <div className="w-full h-56 bg-gray-100">
-                    <img src={recent.coverImage} alt="" className="w-full h-full object-cover grayscale"/>
+                    <img src={recent.coverImage} alt="" className="w-full h-full object-cover"/>
                 </div>
                        
                             <h2 className="text-center text-xl font-bold p-3 text-gray-900 mb-2 leading-tight">{recent.categories}</h2>

@@ -7,7 +7,7 @@ const AboutUs = () => {
     <section className="bg-gray-50 py-20 px-6">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         <div>
-     <h2 className="text-6xl font-bold text-gray-700 mb-4">About TravelEase</h2>
+     <h2 className="text-6xl font-bold text-gray-900 mb-4">About TravelEase</h2>
     <p className="text-gray-600 leading-7 mb-6">TravelEase is a modern vehicle booking and trip management platform designed to help travelers find the perfect ride quickly, securely, and at the best price. From sedans to SUVs to eco-friendly EVs—we make every journey easier.</p>
 
     <ul className="space-y-4">

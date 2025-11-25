@@ -24,7 +24,7 @@ const RecentVehicles = () => {
                         <div
                         key={recent._id} className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-200">
                     <div className="w-full h-56 bg-gray-100">
-                    <img src={recent.coverImage} alt="" className="w-full h-full object-cover grayscale"/>
+                    <img src={recent.coverImage} alt="" className="w-full h-full object-cover"/>
                 </div>
                        <div className="p-4">
                         <div className='flex text-green-700  justify-between items-center py-3'>
@@ -40,9 +40,9 @@ const RecentVehicles = () => {
                          <span className="font-bold text-2xl text-black">${recent.pricePerDay}</span>
                         <span className="text-gray-500">{recent.location}</span>
                         </div>
-                        {/* <Link >
-                        <button to={`/latest-vehicles/${recent._id}`} className="btn-donate w-full rounded-md">View Details</button>
-                        </Link> */}
+                        <Link to={`/vehicleDetails/${recent._id}`}>
+                        <button  className="btn-donate w-full rounded-md">View Details</button>
+                        </Link>
                 
                             </div>
                         </div>
