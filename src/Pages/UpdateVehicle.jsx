@@ -1,46 +1,51 @@
 import React from 'react';
-import { toast, ToastContainer } from 'react-toastify';
 import useAuth from '../Hooks/useAuth';
 import useAxios from '../Hooks/useAxios';
+import { toast, ToastContainer } from 'react-toastify';
+import { useLoaderData } from 'react-router';
 
-const AddVehicle = () => {
+const UpdateVehicle = () => {
 
-    const { user } = useAuth();
+    const data = useLoaderData()
+    // console.log(data)
+
+      const { user } = useAuth();
     const axiosInstance = useAxios()
 
     const handleAddVehicle =(e)=>{
-        e.preventDefault()
-        const vehicleName = e.target.vehicleName.value
-        const ownerName = e.target.owner.value
-        const category = e.target.category.value
-        const pricePerDay = e.target.pricePerDay.value
-        const location = e.target.location.value
-        const availability = e.target.availability.value
-        const description = e.target.description.value
-        const coverImage = e.target.coverImage.value
-        const userEmail = e.target.userEmail.value
-        
-        const newProduct = {vehicleName, ownerName, category, pricePerDay, location, availability, description, coverImage, userEmail ,
-            currentUserEmail: user.email,
-            currentUserName : user.displayName,
-            createdAt: new Date().toISOString()
+            e.preventDefault()
+            const vehicleName = e.target.vehicleName.value
+            const owner = e.target.owner.value
+            const category = e.target.category.value
+            const pricePerDay = e.target.pricePerDay.value
+            const location = e.target.location.value
+            const availability = e.target.availability.value
+            const description = e.target.description.value
+            const coverImage = e.target.coverImage.value
+            const userEmail = e.target.userEmail.value
+            
+            const newProduct = {vehicleName, owner, category, pricePerDay, location, availability, description, coverImage, userEmail , 
+                currentUserEmail: user.email,
+                currentUserName : user.displayName,
+                createdAt: new Date().toISOString()
+            }
+    
+            axiosInstance.put(`/allVehicles/${data._id}`, newProduct)
+            .then(data=>{
+                console.log(data)
+                if(data.data){
+                     toast('Vehicle added successfully')
+                }
+            })
+    
         }
 
-        axiosInstance.post('/addVehicle', newProduct)
-        .then(data=>{
-            console.log(data)
-            if(data.data){
-                 toast('Vehicle added successfully')
-            }
-        })
-
-    }
-    
     return (
-        <div className=''>
+        <div>
+            <div className=''>
             <div className=" bg-base-200 pt-40 py-10 px-4">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-6xl font-bold text-center mb-8">Add Vehicle</h1>
+        <h1 className="text-6xl font-bold text-center mb-8">Update Vehicle</h1>
 
         <form onSubmit={handleAddVehicle} className="space-y-6 bg-base-100 p-8 rounded-xl shadow-lg">
           <div className="form-control">
@@ -50,6 +55,7 @@ const AddVehicle = () => {
             <input
               type="text"
               name="vehicleName"
+              defaultValue={data.vehicleName}
               placeholder="Toyota Corolla"
               className="input input-bordered w-full"
               required
@@ -62,6 +68,7 @@ const AddVehicle = () => {
             </label>
             <input
               type="text"
+              defaultValue={data.owner}
               name="owner"
               placeholder="John Doe"
               className="input input-bordered w-full"
@@ -75,6 +82,7 @@ const AddVehicle = () => {
             </label>
             <select
               name="category"
+              defaultValue={data.category}
               className="select select-bordered w-full"
               required
             >
@@ -92,6 +100,7 @@ const AddVehicle = () => {
             </label>
             <input
               type="number"
+              defaultValue={data.pricePerDay}
               name="pricePerDay"
               placeholder="70"
               min="1"
@@ -106,6 +115,7 @@ const AddVehicle = () => {
             </label>
             <input
               type="text"
+              defaultValue={data.location}
               name="location"
               placeholder="Dhaka, Bangladesh"
               className="input input-bordered w-full"
@@ -118,6 +128,7 @@ const AddVehicle = () => {
               <span className="label-text font-semibold">Availability</span>
             </label>
             <select
+            defaultValue={data.availability}
               name="availability"
               className="select select-bordered w-full"
             >
@@ -131,6 +142,7 @@ const AddVehicle = () => {
               <span className="label-text font-semibold">Description</span>
             </label>
             <textarea
+            defaultValue={data.description}
               name="description"
               rows="4"
               placeholder="Comfortable 5-seater with A/C and GPS."
@@ -143,6 +155,7 @@ const AddVehicle = () => {
               <span className="label-text font-semibold">Cover Image URL (imgbb or any)</span>
             </label>
             <input
+            defaultValue={data.coverImage}
               type="url"
               name="coverImage"
               placeholder="https://i.ibb.co/..."
@@ -156,6 +169,7 @@ const AddVehicle = () => {
             </label>
             <input
               type="email"
+              defaultValue={data.userEmail}
               name="userEmail"
               placeholder="john@example.com"
               className="input input-bordered w-full"
@@ -164,14 +178,17 @@ const AddVehicle = () => {
           </div>
 
           <div className="form-control mt-8">
-            <button  type="submit" className="btn-donate w-full">Add A Vehicle</button>
+            <button  type="submit" className="btn-donate w-full">
+              Update Vehicle
+            </button>
           </div>
         </form>
       </div>
     </div>
     <ToastContainer></ToastContainer>
         </div>
+        </div>
     );
 };
 
-export default AddVehicle;
+export default UpdateVehicle;

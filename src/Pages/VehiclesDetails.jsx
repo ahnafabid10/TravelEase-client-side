@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 
 const VehiclesDetails = () => {
     const data = useLoaderData()
@@ -72,8 +72,15 @@ currentUserEmail}
           <span className="font-semibold">Created At:</span> {data.createdAt}
         </p>
       </div>
-
-      <button className="btn-donate w-full sm:w-auto">Book Now</button>
+            <div className='flex flex-col-2 md:flex-col-3 gap-5'>
+            <button className="btn-donate w-full sm:w-auto">Book Now</button>
+            <Link to={`/UpdataVehicle/${data._id}`}>
+            <button className="btn-donate w-full sm:w-auto">Update</button>
+            </Link>
+      
+      <button className="btn-donate w-full sm:w-auto">Delete</button>
+            </div>
+      
     </div>
   </div>
 </div>
