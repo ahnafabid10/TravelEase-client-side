@@ -6,6 +6,7 @@ const RecentVehicles = () => {
     return (
         <div>
             <h2>Latest Vehicles</h2>
+            
 
         </div>
     );

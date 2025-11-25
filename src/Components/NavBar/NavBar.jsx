@@ -13,7 +13,7 @@ const NavBar = () => {
   const handleSignOut =() =>{
     signOutUser()
     .then(
-      toast("Sign Out Successfully")
+      toast("LogOut Successfully")
     )
     .catch(error =>{
       console.log(error)
@@ -26,7 +26,7 @@ const NavBar = () => {
       <NavLink to="/allVehicles" >All Vehicles</NavLink>
       {
         user && <>
-        <NavLink to="/addVehicle" >Add Vehicles</NavLink>
+        <NavLink to="/addVehicle" >Add Vehicle</NavLink>
         <NavLink to="/myVehicles" >My Vehicles</NavLink>
         <NavLink to="/myBookings" >My Bookings</NavLink>
         </>
@@ -81,7 +81,7 @@ const NavBar = () => {
   <ul
     tabIndex={0}
     className="dropdown-content z-[100] menu p-2 shadow mx- bg-base-100 rounded-box w-35 gap-2 text-black">
-    <li className="pointer-events-none text-gray-500 font-semibold px-2">{user.displayName}</li>
+    <li className="pointer-events-none text-gray-500 hover:text-black font-semibold px-2">{user.displayName}</li>
     <li>
       <button onClick={handleSignOut} className="text-red-600 font-bold">Log Out</button>
     </li>
@@ -107,26 +107,27 @@ const NavBar = () => {
               //   <button onClick={handleSignOut} className="btn-donate dropdown flex items-center space-x-2 text-center transition-colors"><span>Sign Out</span></button>  */}
               // </div>
 
-              <div className="dropdown dropdown-end">
-  <div tabIndex={0} role="button" className="m-1">
-    <img
-      src={user.photoURL}
-      className="w-[45px] h-[45px] rounded-full cursor-pointer border"
-      alt="user"
-    />
-  </div>
-
-  <ul
-    tabIndex={0}
-    className="dropdown-content z-[100] menu p-2 shadow mx- bg-base-100 rounded-box w-35 gap-2 text-black">
-    <li className="pointer-events-none text-gray-500 font-semibold px-2">{user.displayName}</li>
-    <li>
-      <button onClick={handleSignOut} className="text-red-600 font-bold">Log Out</button>
-    </li>
-  </ul>
-</div>
-
               
+  <div className="dropdown dropdown-end dropdown-hover">
+    <div tabIndex={0} role="button" className="m-1">
+      <img
+        src={user.photoURL}
+        className="w-[45px] h-[45px] rounded-full cursor-pointer border"
+        alt="user"
+      />
+    </div>
+    <ul
+      tabIndex={0}
+      className="dropdown-content z-[100] menu p-2 shadow bg-base-100 rounded-box w-35 gap-2 text-black">
+      <li className="pointer-events-none text-gray-600 font-semibold px-2">
+        {user.displayName}
+      </li>
+      <li>
+        <button onClick={handleSignOut} className="text-red-600 font-bold hover:text-red-700">Log Out</button>
+      </li>
+    </ul>
+  </div>
+ 
               :
               <Link to='/login' className="btn-donate flex items-center space-x-2 text-center transition-colors"><FaUser /> <span>Login</span></Link>
             }
