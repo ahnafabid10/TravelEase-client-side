@@ -6,7 +6,7 @@ import RecentVehicles from '../HomeLayOut/RecentVehicles';
 const Home = () => {
     return (
         <div>
-            {/* <Banner></Banner> */}
+            <Banner></Banner>
             <RecentVehicles></RecentVehicles>
         </div>
     );
