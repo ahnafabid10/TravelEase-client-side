@@ -64,19 +64,19 @@ const TopCategories = () => {
     ]
 
     return (
-        <div className=" bg-gray-50 border-b-1 border-gray-400  border-dashed p-6">
+        <div className=" bg-gray-50 border-b-1 border-gray-400 dark:bg-gray-900  border-dashed p-6">
             <div className='max-w-[1440px] mx-auto'>
         <div className="max-w-screen-xl mx-auto">
-                <h2 className="text-6xl text-center font-bold mb-6 p-5 text-gray-900">Top Categories</h2>
-                <h2 className="text-xl text-center font-medium mb-6 text-gray-500">Find The Perfect Vehicle For Your Journey</h2>
+                <h2 className="text-6xl text-center font-bold mb-6 p-5 dark:text-white text-gray-900">Top Categories</h2>
+                <h2 className="text-xl text-center font-medium mb-6 dark:text-gray-300 text-gray-500">Find The Perfect Vehicle For Your Journey</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">{latestVehicles.map(recent => (
                         <div
-                        key={recent._id} className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-200">
+                        key={recent._id} className="bg-white border border-gray-200 dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-200">
                     <div className="w-full h-56 bg-gray-100">
                     <img src={recent.coverImage} alt="" className="w-full h-full object-cover"/>
                 </div>
                        
-                            <h2 className="text-center text-xl font-bold p-3 text-gray-900 mb-2 leading-tight">{recent.categories}</h2>
+                            <h2 className="text-center text-xl  dark:text-white font-bold p-3 text-gray-900 mb-2 leading-tight">{recent.categories}</h2>
                      
                         {/* <Link >
                         <button to={`/latest-vehicles/${recent._id}`} className="btn-donate w-full rounded-md">View Details</button>

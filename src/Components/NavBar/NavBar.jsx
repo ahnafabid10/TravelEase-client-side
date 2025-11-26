@@ -1,10 +1,12 @@
-import React, { use, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { FaUser } from 'react-icons/fa';
 import { AuthContext } from '../../Context/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 
 const NavBar = () => {
+
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const {user, signOutUser} = use(AuthContext)
 
@@ -19,6 +21,19 @@ const NavBar = () => {
       console.log(error)
     })
   }
+
+    useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
+
+
 
   const links = (
     <>
@@ -82,6 +97,14 @@ const NavBar = () => {
     tabIndex={0}
     className="dropdown-content z-[100] menu p-2 shadow mx- bg-base-100 rounded-box w-35 gap-2 text-black">
     <li className="pointer-events-none text-gray-500 hover:text-black font-semibold px-2">{user.displayName}</li>
+
+<input
+           onChange={(e) => handleTheme(e.target.checked)}
+           type="checkbox"
+           defaultChecked={localStorage.getItem('theme') === "dark"}
+           className="toggle"/>
+
+
     <li>
       <button onClick={handleSignOut} className="text-red-600 font-bold">Log Out</button>
     </li>
@@ -122,6 +145,11 @@ const NavBar = () => {
       <li className="pointer-events-none text-gray-600 font-semibold px-2">
         {user.displayName}
       </li>
+      <input
+           onChange={(e) => handleTheme(e.target.checked)}
+           type="checkbox"
+           defaultChecked={localStorage.getItem('theme') === "dark"}
+           className="toggle"/>
       <li>
         <button onClick={handleSignOut} className="text-red-600 font-bold hover:text-red-700">Log Out</button>
       </li>

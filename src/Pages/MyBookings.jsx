@@ -24,7 +24,7 @@ const MyBookings = () => {
     }
     return (
         <div>
-            <div>
+            <div className='min-h-screen'>
             <div className=" bg-gray-50 pt-40 p-6">
             <div className='max-w-[1440px] mx-auto'>
         <div className="max-w-screen-xl mx-auto">
