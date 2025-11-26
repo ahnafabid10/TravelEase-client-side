@@ -1,11 +1,41 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router';
+import useAuth from '../Hooks/useAuth';
+import useAxios from '../Hooks/useAxios';
+import { toast, ToastContainer } from 'react-toastify';
 
 const VehiclesDetails = () => {
     const data = useLoaderData()
+    const {user} = useAuth();
+    const axiosInstance = useAxios()
+
+    const handleBookNow = ()=>{
+
+      const bookingData = {
+    vehicleId: data._id,
+    vehicleName: data.vehicleName,
+    pricePerDay: data.pricePerDay,
+    // owner: data.data.owner,
+    ownerEmail: data.userEmail,
+    bookerEmail: user.currentUserEmail,
+    bookerName: user.currentUserName,
+    createdAt: new Date()
+  };
+
+      axiosInstance.post('/bookNow',  bookingData)
+      .then(res =>{
+        toast('Booked successful')
+        console.log(res.data)
+      })
+
+    }
+
+    
+
     console.log(data)
     return (
         <div className="bg-base-200 py-40 px-4">
+          <h2 className='text-6xl text-gray-900 font-bold text-center mb-5'>Vehicles Details</h2>
   <div className="max-w-6xl mx-auto hero-content flex flex-col lg:flex-row gap-10">
 
     <div className="w-full lg:w-1/2 flex justify-center">
@@ -72,8 +102,8 @@ currentUserEmail}
           <span className="font-semibold">Created At:</span> {data.createdAt}
         </p>
       </div>
-            <div className='flex flex-col-2 md:flex-col-3 gap-5'>
-            <button className="btn-donate w-full sm:w-auto">Book Now</button>
+            <div className='flex flex-col md:flex-row gap-5'>
+            <button onClick={handleBookNow} className="btn-donate w-full sm:w-auto">Book Now</button>
             <Link to={`/UpdataVehicle/${data._id}`}>
             <button className="btn-donate w-full sm:w-auto">Update</button>
             </Link>
@@ -83,6 +113,7 @@ currentUserEmail}
       
     </div>
   </div>
+  <ToastContainer></ToastContainer>
 </div>
 
     );
