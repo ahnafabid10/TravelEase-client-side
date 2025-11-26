@@ -27,7 +27,7 @@ const NavBar = () => {
       {
         user && <>
         <NavLink to="/addVehicle" >Add Vehicle</NavLink>
-        <NavLink to="/myVehicles" >My Vehicles</NavLink>
+        <NavLink to="/myVehiclePage" >My Vehicles</NavLink>
         <NavLink to="/myBookings" >My Bookings</NavLink>
         </>
       }

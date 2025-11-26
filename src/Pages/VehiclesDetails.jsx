@@ -13,15 +13,22 @@ const VehiclesDetails = () => {
     const handleBookNow = ()=>{
 
       const bookingData = {
-    vehicleId: data._id,
+    coverImage:data.coverImage,    
+    _id: data._id,
     vehicleName: data.vehicleName,
     pricePerDay: data.pricePerDay,
-    // owner: data.data.owner,
+    owner: data.owner,
     ownerEmail: data.userEmail,
-    bookerEmail: user.currentUserEmail,
-    bookerName: user.currentUserName,
-    createdAt: new Date()
+    bookerEmail: user.email,
+    bookerName: user.displayName,
+    createdAt: new Date(),
+    category:data.category,
+    location:data.location,
+    availability:data.availability,
+    description:data.description
   };
+
+  console.log(bookingData)
 
       axiosInstance.post('/bookNow',  bookingData)
       .then(res =>{

@@ -12,6 +12,7 @@ import MyBookings from "../Pages/MyBookings";
 import PrivateRoute from "./PrivateRoute";
 import VehiclesDetails from "../Pages/VehiclesDetails";
 import UpdateVehicle from "../Pages/UpdateVehicle";
+import MyVehiclePage from "../Pages/MyVehiclePage";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
         {
             path:'/myBookings',
             element:<PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+        },
+        {
+            path:'/myVehiclePage',
+            element:<PrivateRoute><MyVehiclePage></MyVehiclePage></PrivateRoute>
         },
         {
             path:"/*",

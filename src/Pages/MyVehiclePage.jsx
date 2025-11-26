@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import useAuth from '../Hooks/useAuth';
 import useAxios from '../Hooks/useAxios';
+import useAuth from '../Hooks/useAuth';
 import { Link } from 'react-router';
 
-const MyBookings = () => {
+const MyVehiclePage = () => {
     const {user} = useAuth()
     const [vehicle ,setVehicles] = useState([]) 
     const [ loading, setLoading] = useState(true)
     const axiosInstance = useAxios();
 
     useEffect(()=>{
-        axiosInstance.get(`/bookNow?email=${user.email}`)
+        axiosInstance.get(`/myVehiclePage?email=${user.email}`)
         .then(res=>{
             console.log(res.data)
             setVehicles(res.data)
@@ -22,13 +22,14 @@ const MyBookings = () => {
         return <span className="loading loading-bars loading-xl"></span>
 
     }
+
+
     return (
         <div>
-            <div>
             <div className=" bg-gray-50 pt-40 p-6">
             <div className='max-w-[1440px] mx-auto'>
         <div className="max-w-screen-xl mx-auto">
-                <h2 className="text-6xl text-center font-bold mb-6 p-5 text-gray-900">My Bookings</h2>
+                <h2 className="text-6xl text-center font-bold mb-6 p-5 text-gray-900">My Vehicles</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {vehicle.map(Vehicles => (
                         <div
@@ -69,8 +70,7 @@ const MyBookings = () => {
             
         </div>
         </div>
-        </div>
     );
 };
 
-export default MyBookings;
+export default MyVehiclePage;

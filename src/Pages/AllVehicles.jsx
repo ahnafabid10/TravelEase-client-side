@@ -25,7 +25,8 @@ const AllVehicles = () => {
             <div className='max-w-[1440px] mx-auto'>
         <div className="max-w-screen-xl mx-auto">
                 <h2 className="text-6xl text-center font-bold mb-6 p-5 text-gray-900">All Vehicles</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">{allVehicles.map(Vehicles => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {allVehicles.map(Vehicles => (
                         <div
                         key={Vehicles._id} className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-200">
                     <div className="w-full h-56 bg-gray-100">
