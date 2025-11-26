@@ -34,7 +34,7 @@ const UpdateVehicle = () => {
             .then(data=>{
                 console.log(data)
                 if(data.data){
-                     toast('Vehicle added successfully')
+                     toast('Vehicle Update successfully')
                 }
             })
     

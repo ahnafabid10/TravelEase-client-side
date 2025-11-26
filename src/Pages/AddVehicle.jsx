@@ -26,7 +26,7 @@ const AddVehicle = () => {
             createdAt: new Date().toISOString()
         }
 
-        axiosInstance.post('/addVehicle', newProduct)
+        axiosInstance.post('/allVehicles', newProduct)
         .then(data=>{
             console.log(data)
             if(data.data){
