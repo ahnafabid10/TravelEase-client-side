@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxios from '../Hooks/useAxios';
 import { Link } from 'react-router';
+import { format} from "date-fns";
 
 const RecentVehicles = () => {
 
@@ -20,6 +21,10 @@ const RecentVehicles = () => {
             <div className='max-w-[1440px] mx-auto'>
         <div className="max-w-screen-xl mx-auto">
                 <h2 className="text-6xl text-center font-bold mb-6 p-5 dark:text-white text-gray-900">Latest Vehicles</h2>
+                <p className='text-left py-3'>
+                 {format(new Date(), "EEEE, MMM dd, yyyy")}
+
+                </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">{latestVehicles.map(recent => (
                         <div
                         key={recent._id} className="bg-white border dark:bg-gray-800 border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-200">

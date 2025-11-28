@@ -1,4 +1,7 @@
 import { Link } from 'react-router';
+// import { motion } from "motion/react"
+
+
 
 
 const TopCategories = () => {
@@ -69,8 +72,16 @@ const TopCategories = () => {
         <div className="max-w-screen-xl mx-auto">
                 <h2 className="text-6xl text-center font-bold mb-6 p-5 dark:text-white text-gray-900">Top Categories</h2>
                 <h2 className="text-xl text-center font-medium mb-6 dark:text-gray-300 text-gray-500">Find The Perfect Vehicle For Your Journey</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">{latestVehicles.map(recent => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* <motion.div
+            // style={box}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1 }}
+        /> */}
+                    {latestVehicles.map(recent => (
                         <div
+                        animate={{ rotate: 360 }}
+            transition={{ duration: 1 }}
                         key={recent._id} className="bg-white border border-gray-200 dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-200">
                     <div className="w-full h-56 bg-gray-100">
                     <img src={recent.coverImage} alt="" className="w-full h-full object-cover"/>
