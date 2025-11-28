@@ -5,10 +5,8 @@ import { Link } from 'react-router';
 const AllVehicles = () => {
     const axiosInstance = useAxios();
     const [allVehicles, setAllVehicles] = useState([]);
-    // const [filter, setFilter] = useState([]);
-    // const [location, setLocation] = useState('')
-    // const [sort, setSort] = useState('')
-    // const [category, setCategory] = useState('')
+    const [location, setLocation] = useState('')
+    const [category, setCategory] = useState('')
 
     useEffect(() => {
         axiosInstance.get(`/allVehicles`)
@@ -18,15 +16,47 @@ const AllVehicles = () => {
             })
     }, []);
 
+ const filter = allVehicles.filter(v => {
+        const matchCategory = category ? v.category === category : true;
+        const matchLocation = location ? v.location === location : true;
+        return matchCategory  &&  matchLocation;
+    });
+
 
     return (
-        <div>
+        <div className='min-h-screen'>
             <div className=" bg-gray-50 pt-40 p-6">
             <div className='max-w-[1440px] mx-auto'>
         <div className="max-w-screen-xl mx-auto">
                 <h2 className="text-6xl text-center font-bold mb-6 p-5 text-gray-900">All Vehicles</h2>
+
+                <div className='flex gap-5'>
+                    <div className="dropdown dropdown-center">
+  <div tabIndex={0} role="button" className="btn m-1">Category </div>
+  <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+<li><a onClick={() => setCategory("")}>All</a></li>
+<li><a onClick={() => setCategory("Van")}>Van</a></li>
+<li><a onClick={() => setCategory("SUV")}>SUV</a></li>
+<li><a onClick={() => setCategory("Sedan")}>Sedan</a></li>
+  </ul>
+
+  
+</div>
+                    <div className="dropdown dropdown-center">
+  <div tabIndex={0} role="button" className="btn m-1">Location </div>
+  <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+<li><a onClick={() => setLocation("")}>All</a></li>
+<li><a onClick={() => setLocation("Dhaka, Bangladesh")}>Dhaka, Bangladesh</a></li>
+<li><a onClick={() => setLocation("Chittagong, Bangladesh")}>Chittagong, Bangladesh</a></li>
+<li><a onClick={() => setLocation("Rajshahi, Bangladesh")}>Rajshahi, Bangladesh</a></li>
+  </ul>
+
+  
+</div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {allVehicles.map(Vehicles => (
+                    {filter.map(Vehicles => (
                         <div
                         key={Vehicles._id} className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow duration-200">
                     <div className="w-full h-56 bg-gray-100">
