@@ -6,7 +6,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
 
-    const {signInUser,forgetPassword,signInWithGoogle,} = use(AuthContext)
+    const {signInUser, signInWithGoogle,} = use(AuthContext)
     const [error, setError] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
 
@@ -42,19 +42,19 @@ const Login = () => {
     //         console.log(error)
     //     })
     // }
-    const handleResetPassword = () =>{
-      const email = emailRef.current.value
-      forgetPassword(email)
-      .then(() => {
-        toast(" Password reset email sent!")
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-    toast(errorCode, errorMessage)
-  });
-    }
+  //   const handleResetPassword = () =>{
+  //     const email = emailRef.current.value
+  //     forgetPassword(email)
+  //     .then(() => {
+  //       toast(" Password reset email sent!")
+  // })
+  // .catch((error) => {
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //   // ..
+  //   toast(errorCode, errorMessage)
+  // });
+  //   }
 
     const handleLogin =(e)=>{
         e.preventDefault()
@@ -97,7 +97,9 @@ const Login = () => {
         <input type={showPassword ? "text":"password"} name='password' className="input" placeholder="Password" />
         <div onClick={handleShowPassword} className="btn btn-xs absolute  right-12 ">{showPassword ?  <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}</div>
           </div>
-          <a onClick={handleResetPassword} className="link space-y-2 hover:text-blue-700 link-hover">Forgot password?</a>
+          {/* <a onClick={handleResetPassword} className="link space-y-2 hover:text-blue-700 link-hover">Forgot password?</a>
+          <button className="btn btn-neutral mt-4">Login</button> */}
+          <a className="link space-y-2 hover:text-blue-700 link-hover">Forgot password?</a>
           <button className="btn btn-neutral mt-4">Login</button>
         </fieldset>
         
