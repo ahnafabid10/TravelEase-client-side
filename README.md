@@ -52,22 +52,6 @@ The project includes Firebase Authentication, a modern responsive UI, and MongoD
 
 ---
 
-## 🗂️ Database Structure
-
-```json
-{
-  "vehicleName": "Toyota Corolla",
-  "owner": "John Doe",
-  "category": "Sedan / SUV / Electric / Van",
-  "pricePerDay": 70,
-  "location": "Dhaka, Bangladesh",
-  "availability": "Available",
-  "description": "Comfortable 5-seater with A/C and GPS.",
-  "coverImage": "imgbb image URL",
-  "userEmail": "owner@example.com",
-  "createdAt": "2025-10-29T10:30:00+00:00",
-  "categories": "Electric"
-}
 
 ## 🏠 Home Page Includes
 
