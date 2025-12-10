@@ -1,5 +1,4 @@
 # 🚗 TravelEase – Vehicle Booking & Trip Management Platform  
-### **B12-A10_category-0020 – Explanation Video Project**
 
 Client-side GitHub repo link: https://github.com/ahnafabid10/TravelEase-client-side
 
