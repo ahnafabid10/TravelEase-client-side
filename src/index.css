@@ -6,7 +6,7 @@
 
 @plugin "daisyui/theme" {
   name: "light";
-  default: true,
+  default: true;
   --color-primary: #B11F24;    /* Brand Red */
   --color-secondary: #F3F4F6;  /* Dark Contrast */
   --color-base-100: #FFFFFF;   /* Pure White Background */
@@ -14,7 +14,7 @@
 }
 
 @plugin "daisyui/theme" {
-  name: "travel-dark";
+  name: "dark";
   --color-primary: #B11F24;    /* Brand Red */
   --color-secondary: #F3F4F6;  /* Light Grey Accents */
   --color-base-100: #0F0F0F;   /* Deep Black Background */

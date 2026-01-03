@@ -5,7 +5,7 @@ import { motion } from "motion/react"
 
 const Banner = () => {
     return (
-        <div className="relative w-full h-screen overflow-hidden">
+        <div className="relative w-full h-[80vh] sm:h-screen overflow-hidden">
             {/* Background Image with Parallax Effect */}
             <motion.div 
                 className="absolute inset-0"
