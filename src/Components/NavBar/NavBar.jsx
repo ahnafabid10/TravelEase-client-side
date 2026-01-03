@@ -50,7 +50,7 @@ const NavBar = () => {
   );
 
   return (
-    <div className="fixed bg-transparent p-5 top-0 w-full z-50">
+    <div className="fixed bg-transparent p-5 w-full md:w-full top-0 z-50">
       <nav className="max-w-[1440px] mx-auto bg-black/30 backdrop-blur-md text-white rounded-2xl p-1 md:p-2 border shadow-lg">
         <div className="flex justify-between items-center h-16 px-4">
           <div className="flex items-center space-x-2">
