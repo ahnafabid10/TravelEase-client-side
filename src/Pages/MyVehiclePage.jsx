@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import useAxios from '../Hooks/useAxios';
 import useAuth from '../Hooks/useAuth';
-import { Link } from 'react-router';
+import { Link} from 'react-router';
 import { FaCar, FaMapMarkerAlt, FaDollarSign, FaCheckCircle, FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const MyVehiclePage = () => {
     const { user } = useAuth();
     const [vehicle, setVehicles] = useState([]);
     const [loading, setLoading] = useState(true);
     const axiosInstance = useAxios();
+    // const data = useLoaderData()
 
     useEffect(() => {
         axiosInstance.get(`/myVehiclePage?email=${user.email}`)
@@ -18,6 +20,37 @@ const MyVehiclePage = () => {
                 setLoading(false);
             });
     }, []);
+
+    const handleDelete = (id) => {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#B11F24",
+                cancelButtonColor: "#6B7280",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axiosInstance.delete(`/allVehicles/${id}`)
+                        .then(res => {
+                            console.log(res.data);
+                            if (res.data.deletedCount > 0) {
+                        
+                        const remaining = vehicle.filter(v => v._id !== id);
+                        setVehicles(remaining);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your vehicle has been deleted.",
+                                icon: "success",
+                                confirmButtonColor: "#B11F24"
+                            });
+                }})
+                    
+                }
+            });
+        };
 
     if (loading) {
         return (
@@ -42,7 +75,7 @@ const MyVehiclePage = () => {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-3xl mb-6 shadow-2xl transform hover:scale-110 hover:rotate-6 transition-all duration-500">
                             <FaCar className="w-10 h-10 text-white" />
                         </div>
-                        <h1 className="text-5xl sm:text-6xl font-bold text-base-content mb-4 tracking-tight">
+                        <h1 className="text-4xl sm:text-5xl font-bold text-base-content mb-4 tracking-tight">
                             My Vehicles
                         </h1>
                         <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
@@ -145,17 +178,34 @@ const MyVehiclePage = () => {
                                         </div>
 
                                         {/* Action Buttons */}
-                                        <div className="flex gap-3 pt-2">
-                                            <Link to={`/vehicleDetails/${Vehicles._id}`} className="flex-1">
-                                                <button className="btn btn-primary w-full gap-2 shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-                                                    <FaEye className="w-4 h-4" />
-                                                    View Details
-                                                </button>
-                                            </Link>
-                                            <button className="btn btn-outline btn-error btn-square shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-                                                <FaTrash className="w-4 h-4" />
-                                            </button>
-                                        </div>
+                                        <div className="flex items-center gap-3 pt-4">
+  
+  {/* View */}
+  <Link to={`/vehicleDetails/${Vehicles._id}`} className="flex-1">
+    <button className="btn btn-primary w-full gap-2 shadow-md hover:shadow-lg transition-all duration-300">
+      <FaEye className="w-4 h-4" />
+      View Details
+    </button>
+  </Link>
+
+  {/* Update */}
+  <Link to={`/UpdataVehicle/${Vehicles._id}`} className="flex-1">
+    <button className="btn btn-outline btn-primary w-full gap-2 shadow-md hover:shadow-lg transition-all duration-300">
+      <FaEdit className="w-4 h-4" />
+      Update
+    </button>
+  </Link>
+
+  {/* Delete */}
+  <button
+    onClick={() => handleDelete(Vehicles._id)}
+    className="btn btn-outline btn-error btn-square shadow-md hover:shadow-lg transition-all duration-300"
+  >
+    <FaTrash className="w-4 h-4" />
+  </button>
+
+</div>
+
                                     </div>
                                 </div>
                             ))}

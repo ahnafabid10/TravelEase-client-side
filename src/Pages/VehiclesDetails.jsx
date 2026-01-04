@@ -10,6 +10,7 @@ const VehiclesDetails = () => {
     const data = useLoaderData();
     const { user, loading } = useAuth();
     const axiosInstance = useAxios();
+    console.log('data', data)
 
     const handleBookNow = () => {
         const bookingData = {
@@ -17,7 +18,8 @@ const VehiclesDetails = () => {
             _id: data._id,
             vehicleName: data.vehicleName,
             pricePerDay: data.pricePerDay,
-            owner: data.owner,
+            owner: data.ownerName
+,
             ownerEmail: data.userEmail,
             bookerEmail: user.email,
             bookerName: user.displayName,
@@ -38,32 +40,7 @@ const VehiclesDetails = () => {
             })
     };
 
-    const handleDelete = () => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#B11F24",
-            cancelButtonColor: "#6B7280",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "Cancel"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosInstance.delete(`/allVehicles/${data._id}`)
-                    .then(res => {
-                        console.log(res.data);
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your vehicle has been deleted.",
-                            icon: "success",
-                            confirmButtonColor: "#B11F24"
-                        });
-                    })
-                  
-            }
-        });
-    };
+
 
     if (loading) {
         return (
@@ -207,7 +184,7 @@ const VehiclesDetails = () => {
                                 <div className="flex items-center gap-3">
                                     <FaUser className="w-4 h-4 text-primary" />
                                     <span className="text-base-content/60">Name:</span>
-                                    <span className="text-base-content font-semibold">{data.owner}</span>
+                                    <span className="text-base-content font-semibold">{data.ownerName}</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <FaEnvelope className="w-4 h-4 text-primary" />
@@ -253,19 +230,7 @@ const VehiclesDetails = () => {
                                 <FaTicketAlt className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
                                 Book Now
                             </button>
-                            <Link to={`/UpdataVehicle/${data._id}`} className="flex-1">
-                                <button className="btn btn-outline btn-primary w-full gap-2 shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-lg py-6 group">
-                                    <FaEdit className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                                    Update
-                                </button>
-                            </Link>
-                            <button 
-                                onClick={handleDelete}
-                                className="btn btn-error btn-outline gap-2 shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-lg py-6 group"
-                            >
-                                <FaTrash className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                                Delete
-                            </button>
+                            
                         </div>
                     </div>
                 </div>

@@ -42,7 +42,7 @@ const MyBookings = () => {
                         <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-3xl mb-6 shadow-2xl transform hover:scale-110 hover:rotate-6 transition-all duration-500">
                             <FaTicketAlt className="w-10 h-10 text-white" />
                         </div>
-                        <h1 className="text-5xl sm:text-6xl font-bold text-base-content mb-4 tracking-tight">
+                        <h1 className="text-4xl sm:text-5xl font-bold text-base-content mb-4 tracking-tight">
                             My Bookings
                         </h1>
                         <p className="text-lg text-base-content/70 max-w-2xl mx-auto">

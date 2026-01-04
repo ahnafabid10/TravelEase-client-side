@@ -21,8 +21,8 @@ const RecentVehicles = () => {
             <div className="absolute top-20 right-0 w-80 h-80 bg-[#B11F24]/15 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-40 animate-blob"></div>
             <div className="absolute bottom-20 left-0 w-80 h-80 bg-[#F3F4F6]/20 dark:bg-[#F3F4F6]/5 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-40 animate-blob animation-delay-2000"></div>
 
-            <div className="max-w-[1440px] mx-auto px-6 relative z-10">
-                <div className="max-w-[1200px] mx-auto">
+            <div className="max-w-screen-xl mx-auto relative z-10">
+                <div className="">
                     {/* Header Section */}
                     <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-12">
                         <div className="space-y-3">
@@ -52,7 +52,7 @@ const RecentVehicles = () => {
                     </header>
 
                     {/* Cards Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         {latestVehicles.map((v, index) => (
                             <article 
                                 key={v._id} 
