@@ -181,10 +181,10 @@ const MyVehiclePage = () => {
                                         <div className="flex items-center gap-3 pt-4">
   
   {/* View */}
-  <Link to={`/vehicleDetails/${Vehicles._id}`} className="flex-1">
+  <Link to={`/vehicleDetails/${Vehicles._id}`} className="flex">
     <button className="btn btn-primary w-full gap-2 shadow-md hover:shadow-lg transition-all duration-300">
       <FaEye className="w-4 h-4" />
-      View Details
+      View
     </button>
   </Link>
 

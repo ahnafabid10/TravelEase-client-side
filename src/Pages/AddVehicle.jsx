@@ -62,24 +62,46 @@ const AddVehicle = () => {
     
     return (
         <div className="min-h-screen bg-gradient-to-br from-base-200 via-base-100 to-base-200">
+            {/* Hero Section */}
+<div className="relative overflow-hidden bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-b border-primary/20">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(177,31,36,0.1),transparent_50%)]"></div>
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(177,31,36,0.05),transparent_50%)]"></div>
+
+  <div className="relative max-w-7xl mx-auto px-4 py-24 pt-40">
+    <div className="text-center">
+      <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-3xl mb-6 shadow-2xl transform hover:scale-110 hover:rotate-6 transition-all duration-500">
+        <FaCar className="w-10 h-10 text-white" />
+      </div>
+
+      <h1 className="text-4xl sm:text-5xl font-bold text-base-content mb-4 tracking-tight">
+        Add Your Vehicle
+      </h1>
+
+      <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
+        List your vehicle for rental and start earning today
+      </p>
+
+      <div className="mt-8 flex justify-center gap-4 flex-wrap">
+        <div className="stats shadow-lg bg-base-100 border border-base-300/50">
+          <div className="stat">
+            <div className="stat-title text-base-content/70">Easy Setup</div>
+            <div className="stat-value text-primary">5 min</div>
+          </div>
+        </div>
+
+        <div className="stats shadow-lg bg-base-100 border border-base-300/50">
+          <div className="stat">
+            <div className="stat-title text-base-content/70">Earning Potential</div>
+            <div className="stat-value text-success">High</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
             <div className="pt-24 pb-16 px-4">
                 <div className="max-w-4xl mx-auto">
-                    {/* Hero Header */}
-                    <div className="text-center my-12">
-                        <div className="mb-12">
-                            <div className="bg-base-100 border border-base-300 rounded-2xl shadow-xl p-8 text-center transform hover:scale-[1.02] transition-all duration-300">
-                                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-3xl mb-6 shadow-2xl transform hover:scale-110 hover:rotate-6 transition-all duration-500">
-                                    <FaCar className="w-10 h-10 text-white" />
-                                </div>
-                                <h1 className="text-4xl sm:text-5xl font-bold text-base-content mb-4">
-                                    Add Your Vehicle
-                                </h1>
-                                <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
-                                    List your vehicle for rental and start earning today. Fill in the details below to get started.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
                     {/* Form */}
                     <form onSubmit={handleAddVehicle} className="bg-base-100 rounded-3xl shadow-2xl overflow-hidden border border-base-300/50 transform hover:shadow-3xl transition-all duration-500">

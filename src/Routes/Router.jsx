@@ -13,6 +13,9 @@ import PrivateRoute from "./PrivateRoute";
 import VehiclesDetails from "../Pages/VehiclesDetails";
 import UpdateVehicle from "../Pages/UpdateVehicle";
 import MyVehiclePage from "../Pages/MyVehiclePage";
+import DashboardLayout from "../Layout/DashboardLayout";
+import Dashboard from "../Pages/DashBoard/Dashboard";
+import Profile from "../Pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +79,32 @@ const router = createBrowserRouter([
     ]
 
   },
+  {
+    path:'dashboard',
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    children:[
+        {
+            index:true,
+            element: <Dashboard></Dashboard>
+        },
+        {
+            path:'myVehicle',
+            element:<MyVehiclePage></MyVehiclePage>
+        },
+        {
+            path:'myBookings',
+            element:<MyBookings></MyBookings>
+        },
+        {
+            path:'addVehicle',
+            element:<AddVehicle></AddVehicle>
+        },
+        {
+            path:'profile',
+            element:<Profile></Profile>
+        },
+    ]
+  }
 ]);
 
 export default router;

@@ -46,7 +46,7 @@ const VehiclesDetails = () => {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-base-200 via-base-100 to-base-200">
                 <div className="text-center">
-                    <span className="loading loading-infinity loading-lg text-primary w-20"></span>
+                    <span className="loading loading-bars loading-lg text-primary w-20"></span>
                     <p className="mt-4 text-base-content/70 font-medium">Loading Vehicle Details...</p>
                 </div>
             </div>
