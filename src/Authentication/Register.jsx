@@ -73,10 +73,7 @@ const Register = () => {
             setSuccess(true)
             console.log(result.user)
         })
-        .catch(error=>{
-            const errorMessage = error.message;
-            alert(errorMessage)
-        })
+   
     }
 
     return (
