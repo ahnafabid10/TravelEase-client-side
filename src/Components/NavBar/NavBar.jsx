@@ -44,6 +44,8 @@ const NavBar = () => {
         <>
             <NavLink to="/" className={navLinkClass}>Home</NavLink>
             <NavLink to="/allVehicles" className={navLinkClass}>All Vehicles</NavLink>
+            <NavLink to="/blog" className={navLinkClass}>Blog</NavLink>
+            <NavLink to="/contactUs" className={navLinkClass}>Contact Us</NavLink>
             {user && (
                 <>
                     <NavLink to="/addVehicle" className={navLinkClass}>Add Vehicle</NavLink>

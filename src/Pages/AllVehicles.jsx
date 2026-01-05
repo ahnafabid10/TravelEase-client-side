@@ -7,6 +7,7 @@ const AllVehicles = () => {
     const {loading} = useAuth()
     const axiosInstance = useAxios();
     const [allVehicles, setAllVehicles] = useState([]);
+    const [isLoadingVehicles, setIsLoadingVehicles] = useState(true);
     const [search, setSearch] = useState("");
     const [location, setLocation] = useState('')
     const [category, setCategory] = useState('')
@@ -15,10 +16,13 @@ const AllVehicles = () => {
     const vehiclesPerPage = 8;
 
     useEffect(() => {
+         setIsLoadingVehicles(true);
+
         axiosInstance.get(`/allVehicles`)
             .then(res => {
                 console.log(res.data);
                 setAllVehicles(res.data);
+                setIsLoadingVehicles(false);
             })
     }, []);
 
@@ -36,7 +40,7 @@ const indexOfLastVehicle = currentPage * vehiclesPerPage;
   const currentVehicles = filter.slice(indexOfFirstVehicle, indexOfLastVehicle);
   const totalPages = Math.ceil(filter.length / vehiclesPerPage);
 
-  if(loading){
+  if(loading || isLoadingVehicles){
     return <div className="min-h-screen flex items-center justify-center bg-base-200">
   <span className="loading loading-bars loading-xl text-primary"></span>
 </div>

@@ -6,7 +6,7 @@ import useAxios from '../../Hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
 
 const Dashboard = () => {
-    const { user } = useAuth();
+    const { user,  } = useAuth();
     const axiosInstance = useAxios();
     
     // Fetch all vehicles

@@ -16,6 +16,9 @@ import MyVehiclePage from "../Pages/MyVehiclePage";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Dashboard from "../Pages/DashBoard/Dashboard";
 import Profile from "../Pages/Profile/Profile";
+import Blog from '../Pages/Blog'
+import FAQ from '../Pages/FAQ'
+import ContactUs from '../Pages/ContactUs'
 
 const router = createBrowserRouter([
   {
@@ -49,8 +52,8 @@ const router = createBrowserRouter([
             path:'/vehicleDetails/:id',
             element:<VehiclesDetails></VehiclesDetails>
             ,
-            // loader: ({params}) => fetch(`https://travel-ease-server-side.vercel.app/allVehicles/${params.id}`)
-            loader: ({params}) => fetch(`http://localhost:3000/allVehicles/${params.id}`)
+            loader: ({params}) => fetch(`https://travel-ease-server-side.vercel.app/allVehicles/${params.id}`)
+            // loader: ({params}) => fetch(`http://localhost:3000/allVehicles/${params.id}`)
         },
         {
             path:'/myVehicles',
@@ -60,8 +63,8 @@ const router = createBrowserRouter([
         {
             path:'/updataVehicle/:id',
             element:<PrivateRoute><UpdateVehicle></UpdateVehicle></PrivateRoute>,
-            // loader: ({params}) => fetch(`https://travel-ease-server-side.vercel.app/allVehicles/${params.id}`)
-            loader: ({params}) => fetch(`http://localhost:3000/allVehicles/${params.id}`)
+            loader: ({params}) => fetch(`https://travel-ease-server-side.vercel.app/allVehicles/${params.id}`)
+            // loader: ({params}) => fetch(`http://localhost:3000/allVehicles/${params.id}`)
         },
         {
             path:'/myBookings',
@@ -70,6 +73,18 @@ const router = createBrowserRouter([
         {
             path:'/myVehiclePage',
             element:<PrivateRoute><MyVehiclePage></MyVehiclePage></PrivateRoute>
+        },
+        {
+            path:'/blog',
+            element:<Blog></Blog>
+        },
+        {
+            path:'/faq',
+            element:<FAQ></FAQ>
+        },
+        {
+            path:'/contactUs',
+            element:<ContactUs></ContactUs>
         },
         {
             path:"/*",

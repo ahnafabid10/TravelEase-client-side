@@ -1,10 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { FaCar, FaBars, FaTimes, FaHome, FaPlusCircle, FaTicketAlt, FaSignOutAlt, FaBell, FaCog, FaUserCircle, FaMoon, FaSun } from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router';
+import useAuth from '../Hooks/useAuth';
+import { toast, ToastContainer } from 'react-toastify';
 
 const DashboardLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [theme, setTheme] = useState('light');
+    const { user, signOutUser} = useAuth()
+
+        const handleSignOut = () => {
+            signOutUser()
+                .then(() => {
+                    toast.success("Logged out successfully!", {
+                        position: "top-center",
+                        autoClose: 2000,
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                    toast.error("Logout failed. Please try again.");
+                });
+        };
 
     // Load theme from localStorage on mount
     useEffect(() => {
@@ -73,13 +90,13 @@ const DashboardLayout = () => {
                         </button>
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full ring-2 ring-primary ring-offset-2">
-                                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=B11F24&color=fff" alt="Profile" />
+                                <div className="w-10 rounded-full ring-2 ring-offset-2">
+                                    <img src={user?.photoURL} alt="Profile" />
                                 </div>
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-xl bg-base-100 rounded-box w-52 border border-base-300">
                                 <li className="menu-title">
-                                    <span>John Doe</span>
+                                    <span>{user?.displayName}</span>
                                 </li>
                                 <li><Link to={'/dashboard/profile'}><FaUserCircle className="w-4 h-4" /> Profile</Link></li>
                                 <li><a><FaCog className="w-4 h-4" /> Settings</a></li>
@@ -89,7 +106,7 @@ const DashboardLayout = () => {
                                         {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
                                     </a>
                                 </li>
-                                <li><a className="text-error"><FaSignOutAlt className="w-4 h-4" /> Logout</a></li>
+                                <li><a onClick={handleSignOut} className="text-error"><FaSignOutAlt className="w-4 h-4" /> Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -122,7 +139,7 @@ const DashboardLayout = () => {
 
                         <div className="divider"></div>
 
-                        <button className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-error/10 text-error transition-all duration-300 w-full">
+                        <button onClick={handleSignOut} className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-error/10 text-error transition-all duration-300 w-full">
                             <FaSignOutAlt className="w-5 h-5" />
                             <span>Logout</span>
                         </button>
@@ -143,6 +160,7 @@ const DashboardLayout = () => {
                     </div>
                 </main>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
