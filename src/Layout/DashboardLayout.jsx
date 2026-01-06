@@ -3,19 +3,27 @@ import { FaCar, FaBars, FaTimes, FaHome, FaPlusCircle, FaTicketAlt, FaSignOutAlt
 import { Link, NavLink, Outlet } from 'react-router';
 import useAuth from '../Hooks/useAuth';
 import { toast, ToastContainer } from 'react-toastify';
+import useAxios from '../Hooks/useAxios';
+import { useQuery } from '@tanstack/react-query';
 
 const DashboardLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [theme, setTheme] = useState('light');
     const { user, signOutUser} = useAuth()
+    const axiosInstance= useAxios()
+const {data: userProfile = []} = useQuery({
+  queryKey: ['user', user?.email],
+  queryFn: async()=>{
+    const res = await axiosInstance.get(`/user?email=${user.email}`);
+    return res.data;
+  },
+  enabled: !!user?.email
+});
 
         const handleSignOut = () => {
             signOutUser()
                 .then(() => {
-                    toast.success("Logged out successfully!", {
-                        position: "top-center",
-                        autoClose: 2000,
-                    });
+                    toast("Logged out successfully!");
                 })
                 .catch(error => {
                     console.log(error);
@@ -81,25 +89,20 @@ const DashboardLayout = () => {
                             )}
                         </button>
 
-                        <button className="btn btn-ghost btn-circle relative hover:bg-primary/10 transition-all duration-300">
-                            <FaBell className="w-5 h-5" />
-                            <span className="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
-                        </button>
-                        <button className="btn btn-ghost btn-circle hover:bg-primary/10 transition-all duration-300">
-                            <FaCog className="w-5 h-5" />
-                        </button>
+                        
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full ring-2 ring-offset-2">
-                                    <img src={user?.photoURL} alt="Profile" />
+                                    <img src={userProfile[0]?.photo || user?.photoURL} alt="Profile" />
                                 </div>
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-xl bg-base-100 rounded-box w-52 border border-base-300">
                                 <li className="menu-title">
-                                    <span>{user?.displayName}</span>
+                                    <span>{userProfile[0]?.name || user?.displayName}</span>
                                 </li>
                                 <li><Link to={'/dashboard/profile'}><FaUserCircle className="w-4 h-4" /> Profile</Link></li>
-                                <li><a><FaCog className="w-4 h-4" /> Settings</a></li>
+
+
                                 <li>
                                     <a onClick={toggleTheme}>
                                         {theme === 'light' ? <FaMoon className="w-4 h-4" /> : <FaSun className="w-4 h-4" />}
@@ -115,7 +118,7 @@ const DashboardLayout = () => {
 
             <div className="flex pt-[73px]">
                 {/* Sidebar */}
-                <aside className={`fixed left-0 top-[73px] bottom-0 pt-3 bg-base-100 border-r border-base-300 shadow-xl transition-all duration-300 z-40 ${sidebarOpen ? 'w-64' : 'w-0 -translate-x-full'}`}>
+                <aside className={`fixed left-0 top-[73px] bottom-0 pt-3 bg-base-100 border-r border-base-300 shadow-xl transition-all duration-300 z-40 overflow-hidden ${sidebarOpen ? 'w-64' : 'w-0 -translate-x-full opacity-0'}`}>
                     <nav className="px-4 space-y-2 overflow-y-auto h-full">
                         <NavLink to="/dashboard" end className={navClass}>
                             <FaHome className="w-5 h-5" />

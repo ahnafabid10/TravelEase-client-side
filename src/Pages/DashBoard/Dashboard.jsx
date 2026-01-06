@@ -8,6 +8,14 @@ import { useQuery } from '@tanstack/react-query';
 const Dashboard = () => {
     const { user,  } = useAuth();
     const axiosInstance = useAxios();
+const {data: userProfile = []} = useQuery({
+  queryKey: ['user', user?.email],
+  queryFn: async()=>{
+    const res = await axiosInstance.get(`/user?email=${user.email}`);
+    return res.data;
+  },
+  enabled: !!user?.email
+});
     
     // Fetch all vehicles
     const { data: allVehicles = [], isLoading: vehiclesLoading } = useQuery({
@@ -18,6 +26,7 @@ const Dashboard = () => {
             return res.data;
         }
     });
+    
 
     // Fetch user's vehicles
     const { data: myVehicles = [] } = useQuery({
@@ -100,10 +109,10 @@ const Dashboard = () => {
     return (
         <div className="p-6">
             {/* Welcome Banner */}
-            <div className="relative overflow-hidden bg-gradient-to-r from-primary to-primary/80 rounded-3xl p-8 mb-8 shadow-2xl">
+            <div className="relative overflow-hidden bg-gradient-to-r from-primary to-primary/80 rounded-3xl p-6 mb-8 shadow-2xl">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
                 <div className="relative z-10">
-                    <h2 className="text-3xl font-bold text-white mb-2">Welcome back, {user?.displayName || 'User'}! 👋</h2>
+                    <h2 className="text-3xl font-bold text-white mb-2">Welcome back, {userProfile[0]?.name || user?.displayName || 'User'}! 👋</h2>
                     <p className="text-white/90">Here's what's happening with your vehicle rentals today.</p>
                 </div>
             </div>

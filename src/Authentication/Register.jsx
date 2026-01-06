@@ -3,6 +3,7 @@ import { AuthContext } from '../Context/AuthContext';
 import { Link, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
+import useAxios from '../Hooks/useAxios';
 
 const Register = () => {
 
@@ -10,6 +11,7 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState("")
     const [success, setSuccess] = useState(false)
+    const axiosInstance = useAxios()
 
     const handleShowPassword = (e)=>{
         e.preventDefault()
@@ -42,11 +44,26 @@ const Register = () => {
         setError('')
         setSuccess(false)
 
+        axiosInstance.post("/user", {name, email,photo})
+                .then((res) => {
+                  console.log( res.data);
+                  // navigate("/");
+                })
+
         createUser( email, password)
         .then((result) => {
+
+      //     const formData = new FormData();
+      // formData.append("image", profileImg);
+      // const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_Image_hosting_key}`;
+           
+          
           toast('Registration completed successfully.')
         setSuccess(true)
         const user = result.user
+
+        
+
         e.target.reset()
         updateUser({...user, displayName : name, photoURL: photo })
         .then(()=>{

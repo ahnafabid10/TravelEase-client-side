@@ -3,23 +3,33 @@ import { Link, NavLink } from 'react-router';
 import { FaUser, FaCar, FaTimes, FaBars, FaMoon, FaSun, FaSignOutAlt, FaTachometerAlt } from 'react-icons/fa';
 import { AuthContext } from '../../Context/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
+import useAxios from '../../Hooks/useAxios';
+import { useQuery } from '@tanstack/react-query';
 
 const NavBar = () => {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const { user, signOutUser } = use(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
+    const axiosInstance= useAxios()
+const {data: userProfile = [],} = useQuery({
+  queryKey: ['user', user?.email],
+  queryFn: async()=>{
+    const res = await axiosInstance.get(`/user?email=${user.email}`);
+    return res.data;
+  },
+  enabled: !!user?.email
+});
 
     const handleSignOut = () => {
         signOutUser()
             .then(() => {
-                toast.success("Logged out successfully!", {
-                    position: "top-center",
-                    autoClose: 2000,
+                toast("Logged out successfully!", {
+                    
                 });
             })
             .catch(error => {
                 console.log(error);
-                toast.error("Logout failed. Please try again.");
+                toast("Logout failed. Please try again.");
             });
     };
 
@@ -165,7 +175,7 @@ const NavBar = () => {
               <div className="dropdown dropdown-end">
   <div tabIndex={0} role="button" className="m-1">
     <img
-      src={user.photoURL}
+      src={userProfile[0]?.photo || user.photoURL}
       className="w-[45px] h-[45px] rounded-full cursor-pointer border"
       alt="user"
     />
@@ -176,7 +186,7 @@ const NavBar = () => {
   className="dropdown-content z-[100] menu p-2 shadow mx- bg-base-100 rounded-box w-35 gap-2 text-base-content"
 >
   <li className="pointer-events-none text-gray-400 hover:text-base-content font-semibold px-2">
-    {user.displayName}
+    {userProfile[0]?.name || user.displayName}
   </li>
   <li>
     <Link
@@ -238,11 +248,11 @@ const NavBar = () => {
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
                                                 <div className="w-10 h-10 rounded-full ring-2 ring-primary">
-                                                    <img src={user.photoURL} alt={user.displayName} />
+                                                    <img src={userProfile[0]?.photo || user.photoURL} alt={user.displayName} />
                                                 </div>
                                             </div>
                                             <div>
-                                                <p className="font-bold text-base-content text-sm">{user.displayName}</p>
+                                                <p className="font-bold text-base-content text-sm">{userProfile[0]?.name || user.displayName}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -273,7 +283,6 @@ const NavBar = () => {
                                     </li>
                                     <li>
                                         <Link to="/dashboard" className="text-base-content hover:bg-primary/10 hover:text-primary rounded-lg">
-                                            <FaTachometerAlt className="w-4 h-4" />
                                             Dashboard
                                         </Link>
                                     </li>
@@ -316,18 +325,7 @@ const NavBar = () => {
                     </div>
                 )}
             </nav>
-            <ToastContainer
-                position="top-center"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={true}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme={theme}
-            />
+            <ToastContainer/>
         </div>
     );
 };

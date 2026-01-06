@@ -114,10 +114,7 @@ const Login = () => {
   onClick={() => {
     signInUser("demo@account.com", "123zxcZXC123!@#")
       .then(() => {
-        toast.success("Logged in as Demo User 👤");
-        setTimeout(() => {
-          navigate("/");
-        }, 1200);
+        toast("Logged in as Demo User");
       })
   }}
 >
