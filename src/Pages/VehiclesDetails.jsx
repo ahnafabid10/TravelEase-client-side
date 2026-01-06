@@ -3,7 +3,6 @@ import { Link, useLoaderData } from 'react-router';
 import useAuth from '../Hooks/useAuth';
 import useAxios from '../Hooks/useAxios';
 import { toast, ToastContainer } from 'react-toastify';
-import Swal from 'sweetalert2';
 import { FaCar, FaMapMarkerAlt, FaDollarSign, FaCheckCircle, FaUser, FaEnvelope, FaCalendarAlt, FaEdit, FaTrash, FaTicketAlt, FaTag, FaInfoCircle } from 'react-icons/fa';
 
 const VehiclesDetails = () => {
@@ -15,7 +14,7 @@ const VehiclesDetails = () => {
     const handleBookNow = () => {
         const bookingData = {
             coverImage: data.coverImage,
-            _id: data._id,
+            // _id: data._id,
             vehicleName: data.vehicleName,
             pricePerDay: data.pricePerDay,
             owner: data.ownerName
@@ -32,12 +31,13 @@ const VehiclesDetails = () => {
 
         axiosInstance.post('/bookNow', bookingData)
             .then(res => {
-                toast.success('🎉 Booking successful!', {
-                    position: "top-center",
-                    autoClose: 3000,
-                });
+                toast('Booking successful!')
                 console.log(res.data);
             })
+            .catch(err => {
+        console.log('Booking failed:', err.response || err);
+        toast('Booking failed!');
+    })
     };
 
 
@@ -237,17 +237,6 @@ const VehiclesDetails = () => {
             </div>
 
             <ToastContainer 
-                position="top-center"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={true}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-                className="mt-16"
             />
         </div>
     );

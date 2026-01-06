@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import useAxios from '../../Hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 
 const Dashboard = () => {
     const { user,  } = useAuth();
@@ -94,6 +96,12 @@ const {data: userProfile = []} = useQuery({
             type: 'vehicle'
         }))
     ].slice(0, 4);
+
+      const data = [
+    { name: 'My Vehicles', count: myVehicles.length },
+    { name: 'My Bookings', count: bookings.length },
+  ];
+
 
     if (vehiclesLoading) {
         return (
@@ -189,8 +197,28 @@ const {data: userProfile = []} = useQuery({
                         </Link>
                     </div>
                 </div>
+
+
             </div>
 
+<div className="bg-base-100 rounded-3xl p-6 shadow-xl border border-base-300/50 mt-8">
+      <h3 className="text-xl font-bold mb-4">Your Vehicles vs Bookings</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <AreaChart data={data} margin={{ top: 20, right: 20, left: 0, bottom: 5 }}>
+          <defs>
+            <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis allowDecimals={false} />
+          <Tooltip />
+          <Area type="monotone" dataKey="count" stroke="#4f46e5" fill="url(#colorCount)" />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
         </div>
     );
 };
