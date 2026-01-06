@@ -71,7 +71,7 @@ const handleChangeName = async (data) => {
       <div className="flex flex-col md:flex-row items-center gap-8">
         <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-primary">
           <img
-            src={userProfile[0]?.photo || "https://i.ibb.co/2kR5Q6m/user.png"}
+            src={userProfile[0]?.photo || user.photoURL || "https://i.ibb.co/2kR5Q6m/user.png"}
             alt="profile"
             className="w-full h-full object-cover"
           />
@@ -80,7 +80,7 @@ const handleChangeName = async (data) => {
         <div className="flex-1">
           <h2 className="text-3xl font-bold text-primary flex items-center gap-2">
             <FaRegUserCircle />
-            {userProfile[0]?.name || "No Name"}
+            {userProfile[0]?.name || user.displayName || "No Name"}
           </h2>
 
           <p className="flex items-center gap-2 text-gray-500 mt-2">
